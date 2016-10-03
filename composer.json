@@ -1,0 +1,32 @@
+{
+    "name": "venta/service-provider",
+    "description": "Venta Service Provider package.",
+    "authors": [
+        {
+            "name": "Konstantins Zukovs",
+            "email": "kz@scandiweb.com"
+        },
+        {
+            "name": "Alexey Rehov",
+            "email": "aleksejs@scandiweb.com"
+        },
+        {
+            "name": "Vsevolods Mihailovs",
+            "email": "vsevolods@scandiweb.com"
+        },
+        {
+            "name": "Ilja Lapkovskis",
+            "email": "ilja@scandiweb.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Venta\\ServiceProvider\\": ""
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.0",
+        "venta/contracts": "dev-master"
+    }
+}
