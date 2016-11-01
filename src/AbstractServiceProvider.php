@@ -70,20 +70,6 @@ abstract class AbstractServiceProvider implements ServiceProvider
     abstract public function boot();
 
     /**
-     * Registers commands exposed by service provider.
-     *
-     * @param string[] ...$commandClasses
-     */
-    protected function provideCommands(string ...$commandClasses)
-    {
-        /** @var CommandCollector $commandCollector */
-        $commandCollector = $this->container->get(CommandCollector::class);
-        foreach ($commandClasses as $commandClass) {
-            $commandCollector->addCommand($commandClass);
-        }
-    }
-
-    /**
      * Merges config params from service provider with the global configuration.
      *
      * @param string[] ...$configFiles
@@ -101,7 +87,21 @@ abstract class AbstractServiceProvider implements ServiceProvider
 
         $config = $config->merge($this->appConfig);
 
-        $this->container->set(Config::class, $config);
+        $this->container->bindInstance(Config::class, $config);
 
+    }
+
+    /**
+     * Registers commands exposed by service provider.
+     *
+     * @param string[] ...$commandClasses
+     */
+    protected function provideCommands(string ...$commandClasses)
+    {
+        /** @var CommandCollector $commandCollector */
+        $commandCollector = $this->container->get(CommandCollector::class);
+        foreach ($commandClasses as $commandClass) {
+            $commandCollector->addCommand($commandClass);
+        }
     }
 }
