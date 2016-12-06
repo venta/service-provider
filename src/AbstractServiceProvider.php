@@ -4,7 +4,7 @@ namespace Venta\ServiceProvider;
 
 use Venta\Contracts\Config\Config;
 use Venta\Contracts\Config\ConfigFactory;
-use Venta\Contracts\Console\CommandCollector;
+use Venta\Contracts\Console\CommandCollection;
 use Venta\Contracts\Container\Container;
 use Venta\Contracts\ServiceProvider\ServiceProvider;
 
@@ -98,8 +98,8 @@ abstract class AbstractServiceProvider implements ServiceProvider
      */
     protected function provideCommands(string ...$commandClasses)
     {
-        /** @var CommandCollector $commandCollector */
-        $commandCollector = $this->container->get(CommandCollector::class);
+        /** @var CommandCollection $commandCollector */
+        $commandCollector = $this->container->get(CommandCollection::class);
         foreach ($commandClasses as $commandClass) {
             $commandCollector->addCommand($commandClass);
         }
