@@ -90,7 +90,8 @@ abstract class AbstractServiceProvider implements ServiceProvider
         /** @var ConfigFactory $configFactory */
         $configFactory = $this->container->get(ConfigFactory::class);
         foreach ($configFiles as $configFile) {
-            $config = $config->merge($configFactory->createFromFile($configFile));
+            // todo: fix to pass data array
+            //$config = $config->merge($configFactory->create($configFile));
         }
 
         $config = $config->merge($this->appConfig);
