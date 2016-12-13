@@ -51,7 +51,7 @@ abstract class AbstractServiceProvider implements ServiceProvider
     /**
      * @inheritdoc
      */
-    public static function getDependencies(): array
+    public static function dependencies(): array
     {
         return [];
     }
@@ -59,7 +59,7 @@ abstract class AbstractServiceProvider implements ServiceProvider
     /**
      * @inheritdoc
      */
-    final public static function getName(): string
+    final public static function name(): string
     {
         return static::$name ?: static::class;
     }
@@ -101,7 +101,7 @@ abstract class AbstractServiceProvider implements ServiceProvider
         /** @var CommandCollection $commandCollector */
         $commandCollector = $this->container->get(CommandCollection::class);
         foreach ($commandClasses as $commandClass) {
-            $commandCollector->addCommand($commandClass);
+            $commandCollector->add($commandClass);
         }
     }
 }
