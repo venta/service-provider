@@ -23,18 +23,18 @@ abstract class AbstractServiceProvider implements ServiceProvider
     protected static $name;
 
     /**
-     * Container instance.
-     *
-     * @var Container
-     */
-    protected $container;
-
-    /**
      * Application config.
      *
      * @var Config
      */
     private $appConfig;
+
+    /**
+     * Container instance.
+     *
+     * @var Container
+     */
+    private $container;
 
     /**
      * AbstractServiceProvider constructor.
@@ -68,6 +68,14 @@ abstract class AbstractServiceProvider implements ServiceProvider
      * @inheritdoc
      */
     abstract public function boot();
+
+    /**
+     * @return Container
+     */
+    protected function container(): Container
+    {
+        return $this->container;
+    }
 
     /**
      * Merges config params from service provider with the global configuration.
