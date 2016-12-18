@@ -1,10 +1,8 @@
 {
     "name": "venta/service-provider",
     "description": "The Venta Service Provider package.",
-    "keywords": [
-        "venta",
-        "service provider"
-    ],
+    "keywords": ["venta", "service provider"],
+    "license": "MIT",
     "authors": [
         {
             "name": "Venta Core Team",
