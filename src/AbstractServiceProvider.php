@@ -2,7 +2,6 @@
 
 namespace Venta\ServiceProvider;
 
-use Venta\Contracts\Config\Config;
 use Venta\Contracts\Config\ConfigBuilder;
 use Venta\Contracts\Console\CommandCollection;
 use Venta\Contracts\Container\Container;
@@ -25,7 +24,7 @@ abstract class AbstractServiceProvider implements ServiceProvider
     /**
      * Application config.
      *
-     * @var Config
+     * @var ConfigBuilder
      */
     private $configBuilder;
 
