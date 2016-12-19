@@ -3,7 +3,7 @@
 namespace Venta\ServiceProvider;
 
 use Venta\Contracts\Config\Config;
-use Venta\Contracts\Config\ConfigFactory;
+use Venta\Contracts\Config\ConfigBuilder;
 use Venta\Contracts\Console\CommandCollection;
 use Venta\Contracts\Container\Container;
 use Venta\Contracts\ServiceProvider\ServiceProvider;
@@ -27,7 +27,7 @@ abstract class AbstractServiceProvider implements ServiceProvider
      *
      * @var Config
      */
-    private $appConfig;
+    private $configBuilder;
 
     /**
      * Container instance.
@@ -40,12 +40,12 @@ abstract class AbstractServiceProvider implements ServiceProvider
      * AbstractServiceProvider constructor.
      *
      * @param Container $container
-     * @param Config $appConfig
+     * @param ConfigBuilder $configBuilder
      */
-    public function __construct(Container $container, Config $appConfig)
+    public function __construct(Container $container, ConfigBuilder $configBuilder)
     {
         $this->container = $container;
-        $this->appConfig = $appConfig;
+        $this->configBuilder = $configBuilder;
     }
 
     /**
@@ -84,20 +84,9 @@ abstract class AbstractServiceProvider implements ServiceProvider
      */
     protected function loadConfigFromFiles(string ...$configFiles)
     {
-        /** @var Config $config */
-        $config = $this->container->get(Config::class);
-
-        /** @var ConfigFactory $configFactory */
-        $configFactory = $this->container->get(ConfigFactory::class);
         foreach ($configFiles as $configFile) {
-            // todo: fix to pass data array
-            //$config = $config->merge($configFactory->create($configFile));
+            $this->configBuilder->mergeFile($configFile);
         }
-
-        $config = $config->merge($this->appConfig);
-
-        $this->container->bindInstance(Config::class, $config);
-
     }
 
     /**
