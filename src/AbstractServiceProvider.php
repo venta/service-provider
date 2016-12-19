@@ -84,7 +84,7 @@ abstract class AbstractServiceProvider implements ServiceProvider
     protected function loadConfigFromFiles(string ...$configFiles)
     {
         foreach ($configFiles as $configFile) {
-            $this->configBuilder->mergeFile($configFile);
+            $this->configBuilder->mergeFile((string)$configFile);
         }
     }
 
