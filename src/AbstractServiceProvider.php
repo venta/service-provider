@@ -5,6 +5,7 @@ namespace Venta\ServiceProvider;
 use Venta\Contracts\Config\ConfigBuilder;
 use Venta\Contracts\Console\CommandCollection;
 use Venta\Contracts\Container\Container;
+use Venta\Contracts\Kernel\Kernel;
 use Venta\Contracts\ServiceProvider\ServiceProvider;
 
 /**
@@ -74,6 +75,14 @@ abstract class AbstractServiceProvider implements ServiceProvider
     protected function container(): Container
     {
         return $this->container;
+    }
+
+    /**
+     * @return Kernel
+     */
+    protected function kernel(): Kernel
+    {
+        return $this->container()->get(Kernel::class);
     }
 
     /**
