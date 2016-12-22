@@ -2,7 +2,7 @@
 
 namespace Venta\ServiceProvider;
 
-use Venta\Contracts\Config\ConfigBuilder;
+use Venta\Contracts\Config\MutableConfig;
 use Venta\Contracts\Console\CommandCollection;
 use Venta\Contracts\Container\Container;
 use Venta\Contracts\Kernel\Kernel;
@@ -25,9 +25,9 @@ abstract class AbstractServiceProvider implements ServiceProvider
     /**
      * Application config.
      *
-     * @var ConfigBuilder
+     * @var MutableConfig
      */
-    private $configBuilder;
+    private $config;
 
     /**
      * Container instance.
@@ -39,14 +39,15 @@ abstract class AbstractServiceProvider implements ServiceProvider
     /**
      * AbstractServiceProvider constructor.
      *
+     * @param MutableConfig $mutableConfig
      * @param Container $container
-     * @param ConfigBuilder $configBuilder
      */
-    public function __construct(Container $container, ConfigBuilder $configBuilder)
+    public function __construct(MutableConfig $mutableConfig, Container $container)
     {
+        $this->config = $mutableConfig;
         $this->container = $container;
-        $this->configBuilder = $configBuilder;
     }
+
 
     /**
      * @inheritdoc
@@ -68,6 +69,14 @@ abstract class AbstractServiceProvider implements ServiceProvider
      * @inheritdoc
      */
     abstract public function boot();
+
+    /**
+     * @return MutableConfig
+     */
+    protected function config(): MutableConfig
+    {
+        return $this->config;
+    }
 
     /**
      * @return Container
@@ -93,7 +102,7 @@ abstract class AbstractServiceProvider implements ServiceProvider
     protected function loadConfigFromFiles(string ...$configFiles)
     {
         foreach ($configFiles as $configFile) {
-            $this->configBuilder->mergeFile((string)$configFile);
+            $this->config->merge(require $configFile);
         }
     }
 
