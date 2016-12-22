@@ -39,13 +39,13 @@ abstract class AbstractServiceProvider implements ServiceProvider
     /**
      * AbstractServiceProvider constructor.
      *
-     * @param MutableConfig $mutableConfig
      * @param Container $container
+     * @param MutableConfig $mutableConfig
      */
-    public function __construct(MutableConfig $mutableConfig, Container $container)
+    public function __construct(Container $container, MutableConfig $mutableConfig)
     {
-        $this->config = $mutableConfig;
         $this->container = $container;
+        $this->config = $mutableConfig;
     }
 
 
