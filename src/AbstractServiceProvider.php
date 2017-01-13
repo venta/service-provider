@@ -4,7 +4,7 @@ namespace Venta\ServiceProvider;
 
 use Venta\Contracts\Config\MutableConfig;
 use Venta\Contracts\Console\CommandCollection;
-use Venta\Contracts\Container\Container;
+use Venta\Contracts\Container\MutableContainer;
 use Venta\Contracts\Kernel\Kernel;
 use Venta\Contracts\ServiceProvider\ServiceProvider;
 
@@ -32,19 +32,19 @@ abstract class AbstractServiceProvider implements ServiceProvider
     /**
      * Container instance.
      *
-     * @var Container
+     * @var MutableContainer
      */
     private $container;
 
     /**
      * AbstractServiceProvider constructor.
      *
-     * @param Container $container
+     * @param MutableContainer $mutableContainer
      * @param MutableConfig $mutableConfig
      */
-    public function __construct(Container $container, MutableConfig $mutableConfig)
+    public function __construct(MutableContainer $mutableContainer, MutableConfig $mutableConfig)
     {
-        $this->container = $container;
+        $this->container = $mutableContainer;
         $this->config = $mutableConfig;
     }
 
@@ -79,9 +79,9 @@ abstract class AbstractServiceProvider implements ServiceProvider
     }
 
     /**
-     * @return Container
+     * @return MutableContainer
      */
-    protected function container(): Container
+    protected function container(): MutableContainer
     {
         return $this->container;
     }
