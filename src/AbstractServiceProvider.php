@@ -6,6 +6,7 @@ use Venta\Contracts\Config\MutableConfig;
 use Venta\Contracts\Console\CommandCollection;
 use Venta\Contracts\Container\MutableContainer;
 use Venta\Contracts\Kernel\Kernel;
+use Venta\Contracts\Routing\RouteCollection;
 use Venta\Contracts\ServiceProvider\ServiceProvider;
 
 /**
@@ -118,5 +119,13 @@ abstract class AbstractServiceProvider implements ServiceProvider
         foreach ($commandClasses as $commandClass) {
             $commandCollector->add($commandClass);
         }
+    }
+
+    /**
+     * @return RouteCollection
+     */
+    protected function routes(): RouteCollection
+    {
+        return $this->container()->get(RouteCollection::class);
     }
 }
